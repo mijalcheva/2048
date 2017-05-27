@@ -44,7 +44,7 @@ namespace _2048
             //matrix[1][0] = 4;
             //matrix[1][1] = 2;
             //matrix[1][2] = 2;
-            //matrix[1][3] = 2;
+            matrix[1][3] = 128;
             this.BackColor = Color.FromArgb(253, 247, 237);
             this.lbTitle.ForeColor = Color.FromArgb(118, 114, 103);
             this.lbSubtitle.ForeColor = Color.FromArgb(118, 114, 103);
@@ -140,8 +140,79 @@ namespace _2048
             }
         }
 
-        private void updatePoints() {
+        private bool gameOver() {
+            bool flag = true;
+
+            for (int i = 1; i < 3; i++) {
+                for (int j = 1; j < 3; j++) {
+                    if (matrix[i][j] == matrix[i][j - 1] || matrix[i][j] == matrix[i][j + 1] || matrix[i][j] == matrix[i - 1][j]
+                        || matrix[i][j] == matrix[i + 1][j]) {
+
+                        flag = false;
+                        break;
+                        
+                    }
+
+                }
+                if (!flag)
+                    break;
+            }
+
+            return flag;
+        }
+
+        private void updatePoints()
+        {
             lbPoints.Text = points.ToString();
+        }
+
+        private void showColor(Label lb, int number) {
+            switch (number) { 
+                case 0:
+                    lb.BackColor = Color.FromArgb(205, 193, 179);
+                    break;
+                case 2:
+                    lb.BackColor = Color.FromArgb(250, 248, 239);
+                    lb.ForeColor = Color.FromArgb(187, 173, 160);
+                    break;
+                case 4:
+                    lb.BackColor = Color.FromArgb(205, 193, 180);
+                    lb.ForeColor = Color.FromArgb(187, 173, 160);
+                    break;
+                case 8: 
+                    lb.BackColor = Color.FromArgb(242, 177, 121);
+                    lb.ForeColor = Color.White;
+                    break;
+                case 16:
+                    lb.BackColor = Color.FromArgb(245, 149, 101);
+                    lb.ForeColor = Color.White;
+                    break;
+                case 32:
+                    lb.BackColor = Color.FromArgb(245, 124, 95);
+                    lb.ForeColor = Color.White;
+                    break;
+                case 64:
+                    lb.BackColor = Color.FromArgb(246, 93, 59);
+                    lb.ForeColor = Color.White;
+                    break;
+                case 128:
+                    lb.BackColor = Color.FromArgb(236, 207, 113);
+                    lb.ForeColor = Color.White;
+                    lb.Font = new Font("Arial", 22, FontStyle.Bold);
+                    break;
+                case 256:
+                    lb.BackColor = Color.FromArgb(237, 204, 99);
+                    lb.ForeColor = Color.White;
+                    lb.Font = new Font("Arial", 22, FontStyle.Bold);
+                    break;
+                case 512:
+                    lb.BackColor = Color.FromArgb(237, 204, 99);
+                    lb.ForeColor = Color.White;
+                    lb.Font = new Font("Arial", 22, FontStyle.Bold);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void showNumber(int i, int j) {
@@ -149,94 +220,192 @@ namespace _2048
             if (i == 0) {
                 if (j == 0)
                     if (x != 0)
+                    {
                         label00.Text = x.ToString();
-                    else
+                        showColor(label00, x);
+                    }
+                    else{
                         label00.Text = "";
+                        showColor(label00, 0);
+                    }
+                        
                 else if (j == 1)
                     if (x != 0)
+                    {
                         label01.Text = x.ToString();
+                        showColor(label01, x);
+                    }
                     else
+                    {
                         label01.Text = "";
+                        showColor(label01, 0);
+                    }
                 else if (j == 2)
-                    if (x != 0)
+                    if (x != 0){
                         label02.Text = x.ToString();
+                        showColor(label02,x);}
                     else
+                    {
                         label02.Text = "";
+                        showColor(label02, 0);
+                    }
                 else if (j == 3)
-                    if (x != 0)
+                    if (x != 0){
                         label03.Text = x.ToString();
+                        showColor(label03,x);}
                     else
+                    {
                         label03.Text = "";
+                        showColor(label03, 0);
+                    }
             }
             else if (i == 1) {
                 if (j == 0)
                     if (x != 0)
+                    {
                         label10.Text = x.ToString();
+                        showColor(label10, x);
+                    }
                     else
+                    {
                         label10.Text = "";
+                        showColor(label10, 0);
+                    }
                 else if (j == 1)
                     if (x != 0)
+                    {
+                        showColor(label11, x);
                         label11.Text = x.ToString();
+                    }
                     else
+                    {
                         label11.Text = "";
+                        showColor(label11, 0);
+                    }
                 else if (j == 2)
                     if (x != 0)
+                    {
+                        showColor(label12, x);
                         label12.Text = x.ToString();
+                    }
                     else
+                    {
                         label12.Text = "";
+                        showColor(label12, 0);
+                    }
                 else if (j == 3)
                     if (x != 0)
+                    {
+                        showColor(label13, x);
                         label13.Text = x.ToString();
+                    }
                     else
-                        label13.Text = "";
+                    {
+                        label12.Text = "";
+                        showColor(label12, 0);
+                    }
             }
             else if (i == 2) {
                 if (j == 0)
                     if (x != 0)
+                    {
+                        showColor(label20, x);
                         label20.Text = x.ToString();
+                    }
                     else
+                    {
                         label20.Text = "";
+                        showColor(label20, 0);
+                    }
                 else if (j == 1)
                     if (x != 0)
+                    {
+                        showColor(label21, x);
                         label21.Text = x.ToString();
+                    }
                     else
+                    {
                         label21.Text = "";
+                        showColor(label21, 0);
+                    }
                 else if (j == 2)
                     if (x != 0)
+                    {
+                        showColor(label22, x);
                         label22.Text = x.ToString();
+                    }
                     else
+                    {
                         label22.Text = "";
+                        showColor(label22, 0);
+                    }
                 else if (j == 3)
                     if (x != 0)
+                    {
+                        showColor(label23, x);
                         label23.Text = x.ToString();
+                    }
                     else
+                    {
                         label23.Text = "";
+                        showColor(label23, 0);
+                    }
             }
             else if (i == 3) {
                 if (j == 0)
                     if (x != 0)
+                    {
+                        showColor(label30, x);
                         label30.Text = x.ToString();
+                    }
                     else
+                    {
                         label30.Text = "";
+                        showColor(label30, 0);
+                    }
                 else if (j == 1)
                     if (x != 0)
+                    {
+                        showColor(label31, x);
                         label31.Text = x.ToString();
+                    }
                     else
+                    {
                         label31.Text = "";
+                        showColor(label31, 0);
+                    }
                 else if (j == 2)
                     if (x != 0)
+                    {
+                        showColor(label32, x);
                         label32.Text = x.ToString();
+                    }
                     else
+                    {
                         label32.Text = "";
+                        showColor(label32, 0);
+                    }
                 else if (j == 3)
                     if (x != 0)
+                    {
+                        showColor(label33, x);
                         label33.Text = x.ToString();
+                    }
                     else
+                    {
                         label33.Text = "";
+                        showColor(label33, 0);
+                    }
             }
         }
 
         private void toRight() {
+
+            if (gameOver()) {
+                if (MessageBox.Show("GAME OVER", "Game over", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes) {
+                    this.Close();
+                }
+            }
 
             for (int i = 0; i < 4; i++) { //pravi pomestuvanje na site broevi do desnata granica
                 for (int j = 2; j >=0 ; j--) {
@@ -382,10 +551,7 @@ namespace _2048
 
         }
 
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            label1.Text = e.KeyChar.ToString();
-        }
+        
 
         protected override bool  ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -398,14 +564,14 @@ namespace _2048
             //capture down arrow key
             if (keyData == Keys.Down)
             {
-                label1.Text = "KEY.DOWN";
+                
                 toDown();
                 return true;
             }
             //capture left arrow key
             if (keyData == Keys.Left)
             {
-                //label1.Text = "KEY.LEFT";
+                
                 toLeft();
                 showNumbers();
                 return true;
@@ -423,7 +589,7 @@ namespace _2048
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            label1.Text = e.KeyValue.ToString();
+           
             if (e.KeyCode == Keys.Delete) {
                 toRight();
                 //label1.Text = "True";
